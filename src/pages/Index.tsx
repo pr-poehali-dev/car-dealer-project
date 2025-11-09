@@ -9,9 +9,14 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import CatalogSection from '@/components/CatalogSection';
 import Footer from '@/components/Footer';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const Index = () => {
   const [formData, setFormData] = useState({ name: '', phone: '' });
+  const advantagesAnimation = useScrollAnimation();
+  const formAnimation = useScrollAnimation();
+  const servicesAnimation = useScrollAnimation();
+  const contactsAnimation = useScrollAnimation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,7 +94,12 @@ const Index = () => {
             Почему именно мы
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div 
+            ref={advantagesAnimation.ref} 
+            className={`grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-700 ${
+              advantagesAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <div className="text-center p-8 rounded-xl hover:shadow-lg transition-shadow">
               <div className="w-20 h-20 mx-auto mb-6 gradient-primary rounded-full flex items-center justify-center">
                 <Icon name="Award" size={40} className="text-white" />
@@ -119,7 +129,12 @@ const Index = () => {
 
       <section id="credit" className="py-16 gradient-primary">
         <div className="container mx-auto px-4">
-          <div className="max-w-xl mx-auto bg-white rounded-2xl p-8 shadow-2xl">
+          <div 
+            ref={formAnimation.ref}
+            className={`max-w-xl mx-auto bg-white rounded-2xl p-8 shadow-2xl transition-all duration-700 ${
+              formAnimation.isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}
+          >
             <h2 className="text-3xl font-heading font-bold text-center mb-2">Оставить заявку</h2>
             <p className="text-center text-muted-foreground mb-8">Мы перезвоним в течение 15 минут</p>
             
@@ -165,7 +180,12 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-heading font-bold text-center mb-12">Наши услуги</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div 
+            ref={servicesAnimation.ref}
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${
+              servicesAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <Card className="hover:shadow-xl transition-shadow">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 mx-auto mb-4 gradient-primary rounded-full flex items-center justify-center">
@@ -225,7 +245,12 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-heading font-bold text-center mb-12">Контакты</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div 
+            ref={contactsAnimation.ref}
+            className={`grid grid-cols-1 md:grid-cols-2 gap-12 transition-all duration-700 ${
+              contactsAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <Icon name="MapPin" size={24} className="text-primary mt-1" />
